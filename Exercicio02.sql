@@ -41,8 +41,17 @@ INSERT INTO carros (id_pessoa, marca, modelo, ano_lamcamento, ano_fabricacao, mo
 
 
 
+SELECT pessoas.nome 'Dono', carros.marca 'Marca', carros.modelo 'Modelo', carros.ano_lamcamento 'Ano lançamento', 
+	 carros.ano_fabricacao 'Ano fabricação',  carros.motor 'Motor', carros.cor 'Cor', carros.preco 'Preço' 
+FROM carros
+JOIN pessoas ON(pessoas.id = carros.id_pessoa);
+
+SELECT carros.marca 'Marca', carros.modelo 'Modelo', carros.ano_lamcamento 'Ano lançamento', 
+	 carros.ano_fabricacao 'Ano fabricação',  carros.motor 'Motor', carros.cor 'Cor', carros.preco 'Preço' 
+FROM carros
+JOIN pessoas ON (pessoas.id = carros.id_pessoa)
+WHERE pessoas.nome LIKE '%Samuel%';
 
 
-SELECT * FROM pessoas;
-SELECT * FROM carros;
+
 
