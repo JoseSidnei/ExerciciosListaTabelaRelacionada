@@ -1,7 +1,4 @@
-﻿DROP TABLE caracteristicas;
-DROP TABLE alunos;
-
-CREATE TABLE alunos(
+﻿CREATE TABLE alunos(
 	id		INT IDENTITY(1,1),
 	nome	VARCHAR(200),
 	idade	TINYINT,
@@ -50,6 +47,20 @@ INSERT INTO caracteristicas (id_aluno, nome) VALUES
 ((SELECT id FROM alunos WHERE nome = 'Joaquim'), 'Empático(a)'),
 ((SELECT id FROm alunos WHERE nome = 'Joaquim'), 'Altruísta');
 
+SELECT alunos.nome 'Nome', caracteristicas.nome 'Características' FROM  caracteristicas
+JOIN alunos ON (alunos.id = caracteristicas.id_aluno);
 
-SELECT * FROM alunos;
-SELECT * FROM caracteristicas;
+SELECT COUNT(caracteristicas.id) 'Quantidade de Alunos Altruístas' FROM caracteristicas
+JOIN  alunos ON(caracteristicas.id_aluno = alunos.id)
+WHERE caracteristicas.nome = 'Altruísta';
+
+SELECT caracteristicas.nome 'Característica', COUNT(caracteristicas.id) 'Quantidade de alunos'
+FROM caracteristicas
+GROUP BY caracteristicas.nome
+ORDER BY caracteristicas.nome;
+
+SELECT caracteristicas.nome 'Característica de Sophia' FROM caracteristicas
+JOIN alunos ON (alunos.id = caracteristicas.id_aluno)
+WHERE alunos.nome = 'Sophia';
+
+

@@ -1,48 +1,39 @@
-﻿DROP TABLE contas_a_receber;
-DROP TABLE contas_a_pagar;
-DROP TABLE emails;
-DROP TABLE celulares;
-DROP TABLE clientes;
-
-CREATE TABLE clientes(
-	id INT IDENTITY(1,1),
-	nome TEXT NOT NULL,
-	sexo CHAR(1)NOT NULL
+﻿CREATE TABLE clientes(
+	id INT IDENTITY(1,1) PRIMARY KEY,
+	nome VARCHAR(200) NOT NULL,
+	sexo CHAR(1) NOT NULL
 );
 
-CREATE TABLE celulares(
-	id INT IDENTITY(1,1) NOT NULL,
+CREATE TABLE calulares(
+	id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	id_cliente INT NOT NULL,
-	valor TEXT NOT NULL,
-	ativo BIT DEFAULT 1
+	valor DECIMAL(20,2),
+	ativo BIT DEFAULT 1,
+	FOREIGN KEY(id_cliente) REFERENCES clientes(id)
 );
 
 CREATE TABLE emails(
-	id INT IDENTITY(1,1) NOT NULL,
+	id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	id_cliente INT NOT NULL,
-	valor TEXT NOT NULL,
+	valor DECIMAL(20,2) NOT NULL,
 	ativo BIT DEFAULT 1,
-	FOREIGN KEY (id_cliente) REFERENCES clientes(id)
+	FOREIGN KEY(id_cliente) REFERENCES clientes(id)
 );
 
 CREATE TABLE contas_a_pagar(
-	id INT iDENTITY (1,1) NOT NULL,
+	id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	id_cliente INT NOT NULL,
-	valor REAL NOT NULL,
-	data_vencimento DATE NOT NULL,
+	valor REAL,
+	data_vencimento DATE,
 	valor_pago REAL DEFAULT 0,
-	STATUS TEXT DEFAULT 'Pagar',
-	ativo BIT DEFAULT 1,
-	FOREIGN KEY (id_cliente) REFERENCES clientes(id)
+	status VARCHAR(100) DEFAULT 'pagar',
+	ativo BIT DEFAULT 1, 
+	FOREIGN KEY(id_cliente) REFERENCES clientes(id)
 );
 
 CREATE TABLE contas_a_receber(
-	id INT IDENTITY(1,1) NOT NULL,
+	id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	id_cliente INT NOT NULL,
-	valor_a_receber REAL,
-	data_para_pagamento DATE,
-	STATUS TEXT DEFAULT 'Receber',
-	ativo BIT DEFAULT 1,
-	FOREIGN KEY (id_cliente) REFERENCES clientes(id)
-);
 
+	FOREIGN KEY(id_cliente) REFERENCES clientes(id)
+);
