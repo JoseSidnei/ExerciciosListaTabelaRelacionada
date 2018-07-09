@@ -125,7 +125,78 @@ WHERE id_cliente = (SELECT id FROM clientes WHERE nome LIKE 'Salvador%'); */
 /* UPDATE contas_a_pagar SET valor_pago = 700.00, status_pagar = 'Pago'
 WHERE id_cliente = (SELECT id FROM clientes WHERE nome LIKE 'Salvador%' AND valor = 700.00); */
 
+/*SELECT 
+	clientes.nome 'Cliente',
+	contas_pagar.valor 'Valor',
+	contas_pagar.data_vencimento 'Data de Vencimento',
+	contas_pagar.valor_pago 'Valor Pago'
+FROM contas_pagar
+JOIN clientes ON(clientes.id = contas_pagar.id_cliente);*/
+
+/*SELECT 
+	clientes.nome'Cliente',
+	contas_pagar.valor 'Valor',
+	MONTH(contas_pagar.data_vencimento) 'Data de Vencimento'
+FROM contas_pagar
+JOIN clientes ON(clientes.id = contas_pagar.id_cliente);*/
+
+/*SELECT 
+	clientes.nome 'Cliente',
+	SUM(contas_pagar.valor) 'Valor'
+FROM 
+	contas_pagar
+JOIN 
+	clientes ON(clientes.id = contas_pagar.id_cliente)
+GROUP BY 
+	clientes.nome
+ORDER BY 
+	clientes.nome;*/
 
 
-SELECT * FROM contas_a_pagar;
- 
+
+-- Contas a receber
+
+
+
+/*UPDATE 
+	contas_receber
+SET
+	valor_recebido = 1000
+FROM
+	contas_receber
+INNER JOIN clientes
+	ON contas_receber.id_cliente = clientes.id
+WHERE
+	clientes.sexo = 'F';*/
+
+/*UPDATE 
+	contas_receber
+SET
+	data_recebimento = '2018-07-06'
+FROM
+	contas_receber
+INNER JOIN clientes
+	ON contas_receber.id_cliente = clientes.id
+WHERE
+	(clientes.nome LIKE 'A%') OR (clientes.nome LIKE 'S%');*/
+
+/*SELECT 
+	clientes.nome 'Cliente',
+	SUM(contas_receber.valor_receber) 'Total Receber'
+FROM
+	contas_receber
+JOIN 
+	clientes ON(clientes.id = contas_receber.id_cliente)
+GROUP BY 
+	clientes.nome*/
+
+/*SELECT 
+	nome 'Cliente',
+	COUNT(contas_receber.id) 'Quantidade de contas a receber'
+FROM
+	contas_receber
+JOIN
+	clientes ON(clientes.id = contas_receber.id_cliente)
+GROUP BY 
+	clientes.nome;*/
+
